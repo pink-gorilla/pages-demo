@@ -1,0 +1,3 @@
+[:div.bg-blue-500
+ [:p "Showing multiple line text"]
+ [user/text "Hello!\nTo the next world!"]]

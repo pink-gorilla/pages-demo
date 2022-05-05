@@ -1,0 +1,2 @@
+[:div.bg-blue-500
+ [:p "Hello, " [:b "World!"]]]

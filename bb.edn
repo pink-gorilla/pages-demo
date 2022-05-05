@@ -1,0 +1,15 @@
+{:paths ["script"]
+ :deps {babashka/fs {:mvn/version "0.1.1"}
+        babashka/babashka.curl {:mvn/version "0.1.2"}}
+
+ :tasks {:requires [[scratchpad :refer[show snippet-list show-random]]
+                    [clojure.edn :as edn]
+                    [babashka.fs :as fs]]
+         ; tasks
+         hello (show [:div.text-blue-500.bg-red-300 "Hello, from " [:b "Babashka!"]])
+         text (show ['user/text "Hello,\nfrom Babashka!"])
+         snippets (println (snippet-list))
+         random (show-random)
+
+ }
+} 
