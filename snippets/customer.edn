@@ -1,0 +1,6 @@
+[:div
+ [:div "Hello "
+  [:p.text-blue-500 " world!"]]
+  [:p "Note: to get a validly defined user/customer in goldly-docs"
+      "you could run clj -X:demo in a cloned copy of org.pinkgorilla/viz-spec"]
+ [user/customer {:first "Walter" :last "Schlemmel"}]]
