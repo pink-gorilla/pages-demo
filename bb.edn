@@ -3,13 +3,51 @@
         babashka/babashka.curl {:mvn/version "0.1.2"}}
 
  :tasks {:requires [[scratchpad :refer[show snippet-list show-random]]
+                    [pages]
                     [clojure.edn :as edn]
                     [babashka.fs :as fs]]
          ; tasks
-         hello (show [:div.text-blue-500.bg-red-300 "Hello, from " [:b "Babashka!"]])
-         text (show ['user/text "Hello,\nfrom Babashka!"])
-         snippets (println (snippet-list))
-         random (show-random)
+
+         ;; SNIPPETS
+         show-snippets (println (snippet-list))
+         
+         ;; PAGES
+         users (println "users that have published pages: " (-> (pages/users) pr-str))
+
+         my-pages (let [user (-> pages/creds :user)]
+           (println "published pages of user " user "are: "
+                    (-> (pages/user-pages user) pr-str)))
+
+         get-page (let [user (-> pages/creds :user)
+                        page "demo9"]
+           (println "details for " user "/" page ": "
+                    (-> (pages/user-page user page) pr-str)))
+
+         publish-page (let [user (-> pages/creds :user)
+                            password (-> pages/creds :password)
+                            page "demo9"
+                            content ['user/text "Hello,\nfrom Babashka!"]
+                            ]
+                         (->> (pages/publish user password page content)
+                              (println "publish result: ")))
+
+         publish-bad (let [user "daslu"
+                           password "i-dont-know"
+                           page "demo9"
+                           content ['user/text "Hello,\nfrom Babashka!"]]
+                        (->> (pages/publish user password page content)
+                             (println "publish result: ")))
+
+
+         ;; SCRATCHPAD IN GOLDLY-DOCS
+         show-hello (show [:div.text-blue-500.bg-red-300 "Hello, from " [:b "Babashka!"]])
+         show-text (show ['user/text "Hello,\nfrom Babashka!"])
+         show-random (show-random)
+         
+         
+
+        
+
 
  }
 } 
